@@ -17,7 +17,8 @@ const SummaryPanel = ({ data }) => {
 
   const handleDownload = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/summary_csv');
+      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+      const res = await fetch(`${apiBase}/api/summary_csv`);
       if (!res.ok) throw new Error('Failed to fetch CSV');
       const blob = await res.blob();
       const url = window.URL.createObjectURL(blob);
